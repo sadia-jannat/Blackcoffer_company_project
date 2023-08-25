@@ -1,0 +1,139 @@
+{%load static %}
+
+<html>
+  <head>
+   
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Fontawesome link for text-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Autocomplete link-->
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+
+
+<!-- jQuery for auto search last -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- jQuery UI for auto search last-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- static nebar link-->
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<!--try-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<!--try-->
+<title>House </title>
+
+<!--latest--> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
+ <!--end-->
+
+
+</head>
+<body >
+
+   <!--heading-->
+   <div class="container-fluid py-2 px-2 rounded shadow rounded rounded-pill" style="color:#000000; background-color:#72A0C1;">
+    <header class="text-center">
+        <h2 style="color: #060530	;"><b>Visualization Chart</b></h4>
+        <h5>Today: <strong style="color:#000000;">{% now 'D, jS F Y' %}</strong></h5>
+    </header>
+  </div> <br>
+  <button type="submit" class="btn btn-outline-info ml-5 mt-2 my-2 my-sm-0"> <a href="/" style="color: #220d9c;">Back to Previous Page</a></button>
+    <br>
+
+  <!--start second-->
+
+  <div class="container justify-content-center">
+    <div class="row">
+
+  <div class="col-md ml-5 mr-5 mt-5 mb-5 mshadow justify-content-center">
+    <h2 style="text-align: center;">Intensity Chart</h2>
+
+    <canvas id="scatterChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('scatterChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Intensity_1', 'Intensity_2', 'Intensity_3', 'Intensity_4','Intensity_5', 'Intensity_6', 'Intensity_7', 'Intensity_8',
+      'Intensity_9','Intensity_10','Intensity_11','Intensity_12','Intensity_13','Intensity_14'], 
+      datasets: [{
+        label: '# of Intensity Chart',
+        data: [{% for xx in x %} {{xx}}, {% endfor%}],
+
+        backgroundColor: [
+        '#7C0A02',
+        '#FFBF00',
+        '#0048BA',
+        '#006B3C',
+        "rgba(255, 0, 0, 0.5)",
+      "rgba(100, 255, 0, 0.5)",
+      "rgba(200, 50, 255, 0.5)",
+      "rgba(0, 100, 255, 0.5)",
+      "rgba(200, 50, 255, 0.5)",
+      "rgba(0, 100, 255, 0.5)",
+      '#7C0A02',
+        '#FFBF00',
+        '#0048BA',
+        '#006B3C',
+
+         ],
+
+        borderColor: [
+        '#7C0A02',
+        '#FFBF00',
+        '#0048BA',
+        '#006B3C',
+
+       ],
+
+        borderWidth: 1
+      }]
+    },
+
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  
+</script>
+</div>
+
+</div>
+</div>
+
+
+
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>                 

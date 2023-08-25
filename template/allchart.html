@@ -1,0 +1,316 @@
+{%load static %}
+
+<html>
+  <head>
+   
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Fontawesome link for text-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+<!-- Fontawesome Links icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+<!--Autocomplete link-->
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+
+
+<!-- jQuery for auto search last -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- jQuery UI for auto search last-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- static nebar link-->
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<!--try-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<!--try-->
+<title>House </title>
+
+<!--latest--> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
+ <!--end-->
+
+
+</head>
+<body >
+
+  <!--heading-->
+    <div class="container-fluid py-2 px-2 rounded shadow rounded rounded-pill" style="color:#000000; background-color:#72A0C1;">
+      <header class="text-center">
+          <h2 style="color: #060530	;"><b>Visualization Chart</b></h4>
+          <h5>Today: <strong style="color:#000000;">{% now 'D, jS F Y' %}</strong></h5>
+      </header>
+    </div> <br>
+    <!--end heading-->  
+    <!--button-->
+    <button type="submit" class="btn btn-outline-info ml-5 mt-2 my-2 my-sm-0"> <a href="{% url 'filter_dashboard' %}" style="color: #220d9c;">Filter Dashboard Page</a></button>
+    <button class="btn btn-outline-info ml-5 mt-2 my-2 my-sm-0" type="submit"> <a href="{% url 'doughnutchart' %}" style="color: #220d9c;">Country Chart Page</a></button>
+    <button class="btn btn-outline-info ml-5 mt-2 my-2 my-sm-0" type="submit"> <a href="{% url 'yearchart' %}" style="color: #220d9c;">Year Chart Page</a></button>
+    <button class="btn btn-outline-info ml-5 mt-2 my-2 my-sm-0" type="submit"> <a href="{% url 'line-chart' %}" style="color: #220d9c;">Intensity Chart Page</a></button>
+    <button class="btn btn-outline-info ml-5 mt-2 my-2 my-sm-0" type="submit"> <a href="{% url 'dashboard' %}" style="color: #220d9c;">Dashboard Page</a></button>
+    
+    <br><br>
+    <!--end-->
+    
+<section>
+    <div class="container">
+        <div class="row">
+    
+          <!--row 1 col 1-->
+            <div class="col-md-6 shadow">
+             <h2 class="" style="text-align: center;"><b>Likelihood Chart</b></h2>
+              <canvas id="myChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <script>
+          const ctx = document.getElementById('myChart');
+        
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Likelihood_value_1', 'Likelihood_value_2', 'Likelihood_value_3', 'Likelihood_value_4'], 
+              datasets: [{
+                label: '# of Likelihood',
+                data: [{% for xx in x %} {{xx}}, {% endfor%}],
+  
+                backgroundColor: [
+                '#7C0A02',
+                '#FFBF00',
+                '#0048BA',
+                '#006B3C',
+       
+                 ],
+  
+                borderColor: [
+                '#7C0A02',
+                '#FFBF00',
+                '#0048BA',
+                '#006B3C',
+        
+               ],
+  
+                borderWidth: 2
+              }]
+            },
+  
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+
+  
+          
+        </script>
+      </div>
+
+<!--start col 2-->
+<div class="col-md-6 shadow">
+  <canvas id="birdsChart" width="1000" height="400"></canvas>
+
+  <script>
+    var birdsCanvas = document.getElementById("birdsChart");
+
+Chart.defaults.font.family = "Lato";
+Chart.defaults.font.size = 22;
+Chart.defaults.color = "black";
+
+var birdsData = {
+  labels: ['relevanceone','relevancetwo','relevancethree','relevancefour','relevancefive','relevancesix'],
+  datasets: [{
+    data: [{% for yy in rel %} {{yy}}, {% endfor%} ],
+    backgroundColor: [
+      "rgba(255, 0, 0, 0.5)",
+      "rgba(100, 255, 0, 0.5)",
+      "rgba(200, 50, 255, 0.5)",
+      "rgba(0, 100, 255, 0.5)",
+      "rgba(200, 50, 255, 0.5)",
+      "rgba(0, 100, 255, 0.5)",
+    ],
+
+    borderColor: [
+              '#7C0A02',
+              '#FFBF00',
+              '#0048BA',
+              '#006B3C',
+              '#7C0A02',
+              '#FFBF00',
+      
+             ],
+  }]
+};
+
+var chartOptions = {
+  plugins: {
+    title: {
+      display: true,
+      align: "center",
+      text: "Relevance Chart"
+    },
+    legend: {
+      align: "left"
+      
+    }
+  }
+};
+
+var polarAreaChart = new Chart(birdsCanvas, {
+  type: 'polarArea',
+  data: birdsData,
+  options: chartOptions
+});
+  </script>
+</div>
+
+    
+</div>
+</div>
+</section><br><br>
+<!--end-->
+<!--section 2-->
+<section>
+<div class="container">
+  <div class="row">
+
+    <!--row 2 col 1  -->
+      <div class="col-md shadow justify-content-center">
+
+        <canvas class="mt-20 mb-20" id="birdsCharttwo" width="800" height="400"></canvas>
+
+<script>
+
+var birdsCanvas = document.getElementById("birdsCharttwo");
+
+Chart.defaults.font.family = "Lato";
+Chart.defaults.font.size = 28;
+Chart.defaults.color = "black";
+
+var birdsData = {
+  labels: ['oil','aut','chang','energy','gas','growth','workforce','emission','production','policy','consumption','vehicel','agriculture',
+  'technology','debt','captital','wealth'],  
+  datasets: [{
+    data: [{% for ty in topic_num %} {{ty}}, {% endfor%}],
+
+    backgroundColor: [
+      "#0048BA",
+      "#B0BF1A",
+      "#DB2D43",
+      "#9F2B68",
+      "#3B7A57",
+      "#C46210",
+      "#FF9966",
+      "#00FFFF",
+      "#FF0000",
+      "#9C2542",
+      "#0018A8",
+      "#DE5D83",
+      "#CC5500",
+      "#FFFF99",
+      "#C41E3A",
+      "#3B7A57",
+      "#C46210",
+    ],
+
+    borderColor: [
+      "#1B1B1B",
+      "#0048BA",
+      "#B0BF1A",
+      "#DB2D43",
+      "#9F2B68",
+      "#3B7A57",
+      "#C46210",
+      "#FF9966",
+      "#00FFFF",
+      "#FF0000",
+      "#9C2542",
+      "#0018A8",
+      "#DE5D83",
+      "#CC5500",
+      "#FFFF99",
+      "#C41E3A",
+      "#3B7A57",
+     
+    ],
+  }],
+};
+
+var chartOptions = {
+  plugins: {
+    title: {
+      display: true,
+      position: "top",
+      text: "Topic Chart"
+    },
+    legend: {
+      align: "center",
+      position: "left",
+      labels: {
+        font: {
+          size: 15
+        }
+      }
+    }
+  },
+  animation: {
+    animateRotate: true
+  },
+  scales: {
+    r: {
+      ticks: {
+        font: {
+          size: 10,
+        },
+        color:"white",
+        backdropColor: "black"
+      }
+    },
+  },
+  elements: {
+    arc: {
+      angle: 190,
+      borderColor: "white"
+    }
+  }
+};
+
+var polarAreaChart = new Chart(birdsCanvas, {
+  type: 'polarArea',
+  data: birdsData,
+  options: chartOptions
+});
+</script>
+</div>
+
+
+</div>
+</div>
+</section>
+<!--end-->
+
+
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>       
